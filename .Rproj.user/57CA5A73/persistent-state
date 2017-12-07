@@ -1,0 +1,8 @@
+build-last-errors="[]"
+build-last-errors-base-dir="~/Documents/Doctorado/Investigacion/RStudio/sglfast/"
+build-last-outputs="[{\"output\":\"==> R CMD INSTALL --no-multiarch --with-keep.source sglfast\\n\\n\",\"type\":0},{\"output\":\"* installing to library ‘/home/juank/R/x86_64-pc-linux-gnu-library/3.3’\\n\",\"type\":1},{\"output\":\"\",\"type\":1},{\"output\":\"* installing *source* package ‘sglfast’ ...\\n\",\"type\":1},{\"output\":\"** libs\\n\",\"type\":1},{\"output\":\"\",\"type\":1},{\"output\":\"make: Nothing to be done for 'all'.\\n\",\"type\":1},{\"output\":\"\",\"type\":1},{\"output\":\"installing to /home/juank/R/x86_64-pc-linux-gnu-library/3.3/sglfast/libs\\n\",\"type\":1},{\"output\":\"** R\\n\",\"type\":1},{\"output\":\"** preparing package for lazy loading\\n\",\"type\":1},{\"output\":\"\",\"type\":1},{\"output\":\"** help\\n\",\"type\":1},{\"output\":\"\",\"type\":1},{\"output\":\"*** installing help indices\\n\",\"type\":1},{\"output\":\"\",\"type\":1},{\"output\":\"** building package indices\\n\",\"type\":1},{\"output\":\"\",\"type\":1},{\"output\":\"** testing if installed package can be loaded\\n\",\"type\":1},{\"output\":\"\",\"type\":1},{\"output\":\"* DONE (sglfast)\\n\",\"type\":1},{\"output\":\"\",\"type\":1}]"
+compile_pdf_state="{\"errors\":[],\"output\":\"\",\"running\":false,\"tab_visible\":false,\"target_file\":\"\"}"
+files.monitored-path=""
+find-in-files-state="{\"handle\":\"\",\"input\":\"\",\"path\":\"\",\"regex\":true,\"results\":{\"file\":[],\"line\":[],\"lineValue\":[],\"matchOff\":[],\"matchOn\":[]},\"running\":false}"
+imageDirtyState="0"
+saveActionState="0"

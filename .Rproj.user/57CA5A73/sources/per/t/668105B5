@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1512065987802.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1389416430",
+    "id" : "668105B5",
+    "lastKnownWriteTime" : 1512304964,
+    "last_content_update" : 1512304964573,
+    "path" : "~/Documents/Doctorado/Investigacion/RStudio/sglfast/R/isgl.R",
+    "project_path" : "R/isgl.R",
+    "properties" : {
+        "cursorPosition" : "88,43",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

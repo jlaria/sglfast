@@ -1,0 +1,13 @@
+Package: sglfast
+Type: Package
+Title: The iterative sparse-group lasso
+Version: 0.1.0
+Author: JC Laria, R Lillo, MC Aguilera-Morillo
+Maintainer: JC Laria <juank.laria@gmail.com>
+Description: sglfast is a fork of SGL (Simon, Friedman, Hastie, Tibshirani 2013), with individual group regularization parameters, and the iterative sparse-group lasso (isgl), a novel algorithm to select the optimal regularization parameters of the sparse-group lasso. 
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports: Rcpp (>= 0.12.13)
+LinkingTo: Rcpp
+RoxygenNote: 6.0.1

@@ -1,0 +1,3 @@
+useDynLib("sglfast")
+
+export(isgl, isgl_simple, solve_inner_problem, predict.isgl)

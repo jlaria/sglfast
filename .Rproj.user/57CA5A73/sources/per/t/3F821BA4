@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1512244064884.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4293282013",
+    "id" : "3F821BA4",
+    "lastKnownWriteTime" : 1512065936,
+    "last_content_update" : 1512065936,
+    "path" : "~/Documents/Doctorado/Investigacion/RStudio/sglfast/R/test_error.R",
+    "project_path" : "R/test_error.R",
+    "properties" : {
+        "cursorPosition" : "11,1",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
