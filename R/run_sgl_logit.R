@@ -30,9 +30,10 @@ run_sgl_logit <- function(data, group.length,  thresh = 0.0001, lambda1 = 0.2, l
   eta = eta + intercept
 
   junk <- .C("logitNest", X = as.double(as.vector(X)), y = as.integer(y), index = as.integer(index), nrow = as.integer(nrow(X)), ncol = as.integer(ncol(X)), numGroup = as.integer(num.groups), rangeGroupInd = as.integer(range.group.ind), groupLen = as.integer(group.length), lambda1 = as.double(lambda1), lambda2 = as.double(lambda2), beta = as.double(beta.old), innerIter = as.integer(inner.iter), outerIter = as.integer(outer.iter), thresh = as.double(thresh), outerThresh = as.double(outer.thresh), eta = as.double(eta), gamma = as.double(gamma), betaIsZero = as.integer(beta.is.zero), betaZero = as.double(intercept), step = as.double(step), groupW = as.double(groupW))
+  if(!is.na(junk$betaZero){
   intercept = junk$betaZero
   beta <- junk$beta
-
+  }
   sol<-list(beta = beta, intercept = intercept )
   return(sol)
 }
