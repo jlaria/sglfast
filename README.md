@@ -19,7 +19,7 @@ Then, install `isgl`
 
 ## Usage
 
-Example 1. Estimating `beta` under linear response.
+### Example 1
 
     library(sglfast)
     
@@ -52,6 +52,40 @@ Example 1. Estimating `beta` under linear response.
     isgl.fit$beta
     isgl.fit$intercept
 
+### Example 2
+
+    library(sglfast)
+    
+    # We create beta="the true coefficient vector" to be used in the simulations.
+    beta = 1:5
+    
+    # We generate the model matrix X with iid columns and rows and the response y
+    X = matrix(rnorm(100*400), nrow = 100)
+    y = X[,1:5]%*%beta
+    
+    # We generate the response from a logit model
+    
+    y = ((1+exp(-y))^-1 > 0.5) + 0
+    
+    
+    # Rows in the training sample
+    train.idx = sample(100, 50)
+    
+    # Group indices for the SGL  
+    group_index = rep(1:40, each=10)
+    
+    # Input data for the iterative 
+    data.train = list(x=X[train.idx,], y=y[train.idx])
+    data.validate = list(x=X[-train.idx,], y=y[-train.idx])
+    
+    # We run the (unpooled) iterative SGL. For the 2-parameter version use isg_simple()
+    isgl.fit = isgl_simple(data.train, data.validate, group_index, type = "logit")
+    
+    # Best model returned by the iSGL algorithm
+    isgl.fit$beta
+    isgl.fit$intercept
+    
+    
 ## References
 
 Simon, N., J. Friedman, T. Hastie, and R. Tibshirani (2013). A sparse-group lasso.

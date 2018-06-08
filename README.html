@@ -135,7 +135,8 @@ library(sglfast)</code></pre>
 </div>
 <div id="usage" class="section level2">
 <h2>Usage</h2>
-<p>Example 1. Estimating <code>beta</code> under linear response.</p>
+<div id="example-1" class="section level3">
+<h3>Example 1</h3>
 <pre><code>library(sglfast)
 
 # We create beta=&quot;the true coefficient vector&quot; to be used in the simulations.
@@ -166,6 +167,40 @@ isgl.fit = isgl(data.train, data.validate, group_index, type = &quot;linear&quot
 # Best model returned by the iSGL algorithm
 isgl.fit$beta
 isgl.fit$intercept</code></pre>
+</div>
+<div id="example-2" class="section level3">
+<h3>Example 2</h3>
+<pre><code>library(sglfast)
+
+# We create beta=&quot;the true coefficient vector&quot; to be used in the simulations.
+beta = 1:5
+
+# We generate the model matrix X with iid columns and rows and the response y
+X = matrix(rnorm(100*400), nrow = 100)
+y = X[,1:5]%*%beta
+
+# We generate the response from a logit model
+
+y = ((1+exp(-y))^-1 &gt; 0.5) + 0
+
+
+# Rows in the training sample
+train.idx = sample(100, 50)
+
+# Group indices for the SGL  
+group_index = rep(1:40, each=10)
+
+# Input data for the iterative 
+data.train = list(x=X[train.idx,], y=y[train.idx])
+data.validate = list(x=X[-train.idx,], y=y[-train.idx])
+
+# We run the (unpooled) iterative SGL. For the 2-parameter version use isg_simple()
+isgl.fit = isgl_simple(data.train, data.validate, group_index, type = &quot;logit&quot;)
+
+# Best model returned by the iSGL algorithm
+isgl.fit$beta
+isgl.fit$intercept</code></pre>
+</div>
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
