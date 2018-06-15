@@ -58,7 +58,7 @@ isgl_simple = function( data.train, data.validate, index = NULL, group.length = 
   lambda.max[2] = max(gamma/sqrt(group.length))
 
   # Start the iterative search
-  nparams = length(lambda.init)
+  nparams = 2
   best_lambdas <- lambda.max*0.1
   num_solves <- 0
   max_solves <- 5000
@@ -79,32 +79,27 @@ isgl_simple = function( data.train, data.validate, index = NULL, group.length = 
 
     # No need to compute lambda1,2 max?
 
-    direction = 1
     curr_lambdas = best_lambdas
-    stepsize = c( best_lambdas[coord]*0.1,
-                  best_lambdas[coord]*0.1 )
-    while (direction < 3) {
+    t0 = best_lambdas[coord]*0.1
 
-      if(stepsize[direction] > 0){
-        step = runif(1, stepsize[direction]*0.1, stepsize[direction])*(3-2*direction)
-        curr_lambdas[coord] = best_lambdas[coord] + step
-        model_params <- solve_inner_problem(data.train, group.length, curr_lambdas, type, simple = T)
-        num_solves <- num_solves + 1
-        cost <- get_validation_cost( data.validate$x, data.validate$y, model_params, type)
-        if(best_cost - cost > 0.00001){
-          best_cost = cost
-          best_lambdas <- curr_lambdas
-          best_beta = model_params
+    # Direction: ->
+    dir = 1
+    t = t0
+    if(t == 0){t = 0.01}
+    while (dir >= -1) {
+      curr_lambdas[coord] = curr_lambdas[coord] + dir*runif(1, 0.1*t, t)
+      model_params <- solve_inner_problem(data.train, group.length, curr_lambdas, type, simple = T)
+      num_solves <- num_solves + 1
+      cost <- get_validation_cost( data.validate$x, data.validate$y, model_params, type)
 
-          stepsize[direction] = c( stepsize[1]*2,
-                                   min(stepsize[2]*2, best_lambdas[coord])
-          )[direction]
-        }
-        else{
-          direction = direction + 1
-        }
+      if(best_cost - cost > 0.00001 ){
+        best_cost = cost
+        best_lambdas <- curr_lambdas
+        best_beta = model_params
+        if(dir==1){t = 2*t}else{t = min(2*t, curr_lambdas[coord])}
       }else{
-        direction = direction + 1
+        dir = dir - 2
+        t = t0
       }
     }
 
@@ -113,7 +108,7 @@ isgl_simple = function( data.train, data.validate, index = NULL, group.length = 
     }else{
       fixed = 0
     }
-    coord <- coord%%(nparams) +1
+    coord <- coord%%(nparams) + 1
   }
 
   solution = list(best_lambdas=best_lambdas, num_solves=num_solves, best_cost=best_cost,
