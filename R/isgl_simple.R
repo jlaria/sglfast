@@ -87,7 +87,7 @@ isgl_simple = function( data.train, data.validate, index = NULL, group.length = 
     t = t0
     if(t == 0){t = 0.01}
     while (dir >= -1) {
-      curr_lambdas[coord] = curr_lambdas[coord] + dir*runif(1, 0.1*t, t)
+      curr_lambdas[coord] = best_lambdas[coord] + dir*runif(1, 0.1*t, t)
       model_params <- solve_inner_problem(data.train, group.length, curr_lambdas, type, simple = T)
       num_solves <- num_solves + 1
       cost <- get_validation_cost( data.validate$x, data.validate$y, model_params, type)
