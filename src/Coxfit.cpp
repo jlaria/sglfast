@@ -1,3 +1,11 @@
+/*
+	Original script in https://cran.r-project.org/web/packages/SGL/
+	Original author: Noah Simon
+
+	This version includes individual group weights in the parameterization of the SGL
+	Author: JC Laria
+*/
+
 #include <iostream>
 #include <math.h>
 
