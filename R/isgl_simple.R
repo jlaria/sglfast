@@ -11,10 +11,11 @@
 #' @param group.length A vector with group length, alternatively to \code{index}.
 #' @param type String: \code{'linear'} or \code{'logit'}.
 #' @param standardize Whether to stardardize \code{data.train} and \code{data.validate}. Recommended if \code{type} is \code{'logit'}.
+#' @param momentum Acceleration rate. Should be > 1.
 #' @return An object of class \code{isgl}.
 
 isgl_simple = function( data.train, data.validate, index = NULL, group.length = NULL, type = "linear",
-                        standardize = F){
+                        standardize = F, momentum = 2){
 
   # We tranform the initial data
   if (standardize){
@@ -96,7 +97,7 @@ isgl_simple = function( data.train, data.validate, index = NULL, group.length = 
         best_cost = cost
         best_lambdas <- curr_lambdas
         best_beta = model_params
-        if(dir==1){t = 2*t}else{t = min(2*t, curr_lambdas[coord])}
+        if(dir==1){t = momentum*t}else{t = min(momentum*t, curr_lambdas[coord])}
       }else{
         dir = dir - 2
         t = t0

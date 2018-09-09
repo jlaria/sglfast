@@ -1,3 +1,4 @@
 useDynLib("sglfast")
+importFrom("stats", "runif")
 
-export(isgl, isgl_simple, solve_inner_problem, predict.isgl)
+export(isgl, isgl_simple, solve_inner_problem, predict.isgl, isgl_rs)

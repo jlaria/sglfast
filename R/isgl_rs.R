@@ -1,4 +1,4 @@
-#' The iterative sparse-group lasso
+#' The iterative sparse-group lasso with random step
 #'
 #' Computes the solution of the sparse-group lasso problem, defined as,
 #' \deqn{\hat{\beta}(\lambda, \gamma)=\arg\min_{\beta\in B} \left\{ \hat{R}(\beta) + \lambda_2 \sum_{j=1}^{J} \gamma_j \|\beta^{(j)}\|_2 +  \lambda_1 \|\beta\|_1 \right\}.}
@@ -10,10 +10,9 @@
 #' @param group.length A vector with group length, alternatively to \code{index}.
 #' @param type String: \code{'linear'} or \code{'logit'}.
 #' @param standardize Whether to stardardize \code{data.train} and \code{data.validate}. Recommended if \code{type} is \code{'logit'}.
-#' @param momentum Acceleration rate. Should be > 1.
 #' @return An object of class \code{isgl}.
-isgl = function( data.train, data.validate, index = NULL, group.length = NULL, type = "linear",
-                 standardize = F, momentum = 2){
+isgl_rs = function( data.train, data.validate, index = NULL, group.length = NULL, type = "linear",
+                 standardize = F){
 
   # We tranform the initial data
   if (standardize){
@@ -86,30 +85,18 @@ isgl = function( data.train, data.validate, index = NULL, group.length = NULL, t
     }
 
     curr_lambdas = best_lambdas
-    t0 = best_lambdas[coord]*0.1
-
-    # Direction: ->
-    dir = 1
-    t = t0
-    if(t == 0){t = 0.01} #just in case... it should never reach 0 tho
-    while (dir >= -1) {
-      curr_lambdas[coord] = best_lambdas[coord] + dir*runif(1, 0.1*t, t)
-      model_params <- solve_inner_problem(data.train, group.length, curr_lambdas, type)
-      num_solves <- num_solves + 1
-      cost <- get_validation_cost( data.validate$x, data.validate$y, model_params, type)
-
-      if(best_cost - cost > 0.00001 ){
-        best_cost = cost
-        best_lambdas <- curr_lambdas
-        best_beta = model_params
-        if(dir==1){t = momentum*t}else{t = min(momentum*t, curr_lambdas[coord])}
-      }else{
-        dir = dir - 2
-        t = t0
-      }
+    t0 = best_lambdas[coord]
+    curr_lambdas[coord] = best_lambdas[coord] + runif(1, -0.9*t0, 0.9*t0)
+    model_params <- solve_inner_problem(data.train, group.length, curr_lambdas, type)
+    num_solves <- num_solves + 1
+    cost <- get_validation_cost( data.validate$x, data.validate$y, model_params, type)
+    if(best_cost - cost > 0.00001 ){
+      best_cost = cost
+      best_lambdas = curr_lambdas
+      best_beta = model_params
     }
-
-    if(old_lambdas[coord] == best_lambdas[coord]){
+      
+  if(old_lambdas[coord] == best_lambdas[coord]){
       fixed = fixed + 1
     }else{
       fixed = 0

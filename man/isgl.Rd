@@ -5,7 +5,7 @@
 \title{The iterative sparse-group lasso}
 \usage{
 isgl(data.train, data.validate, index = NULL, group.length = NULL,
-  type = "linear", standardize = F)
+  type = "linear", standardize = F, momentum = 2)
 }
 \arguments{
 \item{data.train}{A list with the matrix of observations \code{x}, and the response \code{y}, to train the model.}
@@ -19,6 +19,8 @@ isgl(data.train, data.validate, index = NULL, group.length = NULL,
 \item{type}{String: \code{'linear'} or \code{'logit'}.}
 
 \item{standardize}{Whether to stardardize \code{data.train} and \code{data.validate}. Recommended if \code{type} is \code{'logit'}.}
+
+\item{momentum}{Acceleration rate. Should be > 1.}
 }
 \value{
 An object of class \code{isgl}.
