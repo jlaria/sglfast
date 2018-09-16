@@ -74,7 +74,7 @@ isgl_simple_rs = function( data.train, data.validate, index = NULL, group.length
   fixed = 0
   
   # Main loop
-  while ((num_solves < max_solves) &&(fixed < 10*nparams) ) {
+  while ((num_solves < max_solves) &&(fixed < 2*nparams) ) {
     old_lambdas <- best_lambdas
     
     # No need to compute lambda1,2 max?
