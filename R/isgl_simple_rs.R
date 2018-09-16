@@ -82,7 +82,7 @@ isgl_simple_rs = function( data.train, data.validate, index = NULL, group.length
     curr_lambdas = best_lambdas
     t0 = best_lambdas[coord]
     curr_lambdas[coord] = best_lambdas[coord] + runif(1, -0.9*t0, 0.9*t0)
-    model_params <- solve_inner_problem(data.train, group.length, curr_lambdas, type)
+    model_params <- solve_inner_problem(data.train, group.length, curr_lambdas, type, simple = T)
     num_solves <- num_solves + 1
     cost <- get_validation_cost( data.validate$x, data.validate$y, model_params, type)
     if(best_cost - cost > 0.00001 ){
