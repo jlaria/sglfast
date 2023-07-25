@@ -12,7 +12,7 @@ get_lambda1.max = function(data, group.length, beta = rep(0, ncol(data$x)), beta
   if (type == "linear"){
     d = rep(0, ncol(data$x))
     for(i in 1:length(d)){
-      d[i] = abs(1/nrow(data$x) * data$x[,i]%*%(data$y - data$x[, -i]%*%beta[-i] - beta0) )
+      d[i] = abs(1/nrow(data$x) * data$x[,i]%*%(data$y - as.matrix(data$x[, -i])%*%as.matrix(beta[-i]) - beta0) )
     }
   }else if(type == "logit"){
     if(any(beta!=0) || beta0!=0){
