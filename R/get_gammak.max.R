@@ -16,7 +16,7 @@ get_gammak.max = function(data, group.length, k, type, lambda, beta = rep(0, nco
   if( type == "linear" ){
     group.start= c(0, cumsum(group.length)) + 1
     indices = group.start[k]:(group.start[k]+group.length[k] - 1)
-    z = 1/nrow(data$x)*t(data$x[,indices])%*%(data$y - data$x[,-indices]%*%beta[-indices] - beta0)
+    z = 1/nrow(data$x)*t(data$x[,indices])%*%(data$y - as.matrix(data$x[,-indices])%*%as.matrix(beta[-indices]) - beta0)
     S = 0
     for(i in 1:group.length[k]){
       S = S + max(abs(z[i]) - lambda[1], 0)^2
