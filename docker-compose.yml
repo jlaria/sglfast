@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+    rstudio:
+        build:
+            context: inst/rstudio/
+            dockerfile: Dockerfile
+        ports:
+            - "80:8787"
+        tty: true
+        volumes: 
+            - .:/workspace:cached
+        command: /bin/sh -c "while sleep 1000; do :; done"
